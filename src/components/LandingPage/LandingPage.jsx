@@ -63,6 +63,28 @@ const USE_CASES = [
   },
 ];
 
+const SENSOR_PREVIEW = [
+  {
+    id: 1,
+    name: "Antártida · 2",
+    time: "15/06/2026 07:01:04 p. m.",
+    metrics: [
+      { label: "Humedad", value: "56.24 %", trend: "down" },
+      //{ label: "Voltaje", value: "3.76 V", trend: "down" },
+    ],
+  },
+  {
+    id: 2,
+    name: "Antártida · 1",
+    time: "15/06/2026 07:01:04 p. m.",
+    metrics: [
+      { label: "Humedad", value: "44.27 %", trend: "down" },
+      //{ label: "Voltaje", value: "3.62 V", trend: "down" },
+    ],
+  },
+];
+
+
 const PRECIO_BASE = 500;
 
 export default function LandingPage() {
@@ -124,58 +146,31 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="lp-hero-visual">
-            <div className="lp-dashboard-preview">
-              <div className="lp-dp-bar">
-                <span className="lp-dp-dot r" />
-                <span className="lp-dp-dot y" />
-                <span className="lp-dp-dot g" />
-                <span className="lp-dp-url">akameiot.com/dashboard</span>
-              </div>
-              <div className="lp-dp-body">
-                <div className="lp-dp-label">Red Norte — Sensor #04</div>
-                <div className="lp-dp-metrics">
-                  <div className="lp-dp-metric">
-                    <div className="lp-dp-metric-val green">24.3°</div>
-                    <div className="lp-dp-metric-key">Temperatura</div>
+          <div className="lp-dp-body">
+            {SENSOR_PREVIEW.map((s) => (
+                <div key={s.id} className="lp-sensor-card">
+                  <div className="lp-sensor-head">
+                    <span className="lp-sensor-name">{s.name}</span>
+                    <span className="lp-sensor-time">{s.time}</span>
                   </div>
-                  <div className="lp-dp-metric">
-                    <div className="lp-dp-metric-val blue">68%</div>
-                    <div className="lp-dp-metric-key">Humedad</div>
-                  </div>
-                  <div className="lp-dp-metric">
-                    <div className="lp-dp-metric-val amber">1013</div>
-                    <div className="lp-dp-metric-key">Presión hPa</div>
+                  <div className="lp-sensor-metrics">
+                    {s.metrics.map((m) => (
+                      <div key={m.label} className="lp-sensor-metric">
+                        <span className="lp-sensor-metric-label">{m.label}</span>
+                        <span className={`lp-sensor-metric-val ${m.trend}`}>
+                          <span className="lp-trend-arrow">
+                            {m.trend === "up" ? "↑" : "↓"}
+                          </span>
+                          {m.value}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="lp-dp-chart">
-                  <svg viewBox="0 0 260 60" preserveAspectRatio="none">
-                    <polyline
-                      points="0,45 30,38 60,42 90,28 120,32 150,20 180,25 210,18 240,22 260,15"
-                      fill="none"
-                      stroke="#4A9959"
-                      strokeWidth="2"
-                      strokeLinejoin="round"
-                    />
-                    <polyline
-                      points="0,45 30,38 60,42 90,28 120,32 150,20 180,25 210,18 240,22 260,15"
-                      fill="url(#chartFill)"
-                      stroke="none"
-                    />
-                    <defs>
-                      <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#4A9959" stopOpacity="0.15" />
-                        <stop offset="100%" stopColor="#4A9959" stopOpacity="0" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-                </div>
-                <div className="lp-dp-status">
-                  <span className="lp-dp-online" />
-                  En línea · Última lectura hace 12 s
-                </div>
-              </div>
+              ))}
             </div>
-          </div>
+        </div>
+          
         </div>
       </section>
 
@@ -185,7 +180,7 @@ export default function LandingPage() {
           { val: "99.9%", label: "Disponibilidad" },
           { val: "<2 s", label: "Latencia promedio" },
           { val: "CSV", label: "Exportación de datos" },
-          { val: "∞", label: "Dispositivos por red" },
+          { val: "100", label: "Dispositivos por red" },
         ].map((s) => (
           <div key={s.label} className="lp-stat">
             <div className="lp-stat-val">{s.val}</div>
@@ -280,10 +275,8 @@ export default function LandingPage() {
             </div>
             <ul className="lp-pricing-features">
               {[
-                "Sin costo de instalación",
                 "Cancela cuando quieras",
                 "Soporte incluido",
-                "Exportación CSV ilimitada",
                 "Acceso compartido entre usuarios",
                 "Historial completo en la nube",
               ].map((f) => (

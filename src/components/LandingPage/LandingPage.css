@@ -209,6 +209,78 @@
   50% { box-shadow: 0 0 0 5px rgba(29,158,117,0.1); }
 }
 
+/* ── Sensor cards (hero preview) — dispersas, sin contenedor de ventana ── */
+.lp-hero-visual {
+  position: relative;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.lp-dp-body {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.lp-sensor-card {
+  background: #1E2D1A;
+  border: 1px solid #2E4228;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.25);
+  max-width: 280px;
+}
+.lp-sensor-card:nth-child(1) {
+  align-self: flex-start;
+  transform: rotate(-1.5deg);
+}
+.lp-sensor-card:nth-child(2) {
+  align-self: flex-end;
+  transform: rotate(1deg);
+  margin-top: -6px;
+}
+.lp-sensor-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2A3D25;
+}
+.lp-sensor-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #E8EDE6;
+}
+.lp-sensor-time {
+  font-size: 10px;
+  color: #6B7B65;
+  font-family: monospace;
+}
+.lp-sensor-metrics {
+  display: flex;
+  gap: 20px;
+}
+.lp-sensor-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.lp-sensor-metric-label {
+  font-size: 10px;
+  color: #6B7B65;
+}
+.lp-sensor-metric-val {
+  font-size: 15px;
+  font-weight: 600;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #66BB6A;
+}
+.lp-trend-arrow { font-size: 12px; }
+
 /* ── Stats ── */
 .lp-stats {
   display: grid;
