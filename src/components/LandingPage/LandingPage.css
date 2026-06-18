@@ -3,9 +3,16 @@
 
 .lp {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #1a1a1a;
-  background: #ffffff;
+  color: #1A1C19;
+  background: #F4F6F2;
   line-height: 1.6;
+}
+
+.lp-logo-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  display: block;
 }
 
 /* ── Nav ── */
@@ -33,8 +40,8 @@
   gap: 6px;
   letter-spacing: -0.3px;
 }
-.lp-logo-mark { color: #1D9E75; font-size: 14px; }
-.lp-logo-iot { color: #1D9E75; }
+.lp-logo-mark { color: #4A9959; font-size: 14px; }
+.lp-logo-iot { color: #4A9959; }
 
 .lp-nav-links {
   display: flex;
@@ -64,10 +71,10 @@
   white-space: nowrap;
 }
 .lp-btn-primary {
-  background: #1D9E75;
+  background: #4A9959;
   color: #fff;
 }
-.lp-btn-primary:hover { background: #17805e; }
+.lp-btn-primary:hover { background: #3E824B; }
 .lp-btn-ghost {
   background: transparent;
   color: #555;
@@ -83,7 +90,7 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #1D9E75;
+  color: #4A9959;
   margin-bottom: 12px;
 }
 
@@ -107,7 +114,7 @@
   margin-bottom: 20px;
   color: #111;
 }
-.lp-hero-accent { color: #1D9E75; }
+.lp-hero-accent { color: #4A9959; }
 .lp-hero-sub {
   font-size: 16px;
   color: #555;
@@ -169,7 +176,7 @@
   font-family: monospace;
   letter-spacing: -0.5px;
 }
-.lp-dp-metric-val.green { color: #1D9E75; }
+.lp-dp-metric-val.green { color: #4A9959; }
 .lp-dp-metric-val.blue { color: #378ADD; }
 .lp-dp-metric-val.amber { color: #EF9F27; }
 .lp-dp-metric-key {
@@ -193,7 +200,7 @@
 .lp-dp-online {
   width: 7px; height: 7px;
   border-radius: 50%;
-  background: #1D9E75;
+  background: #4A9959;
   box-shadow: 0 0 0 2px rgba(29,158,117,0.25);
   animation: pulse 2s infinite;
 }
@@ -230,7 +237,9 @@
 
 /* ── Sections ── */
 .lp-section { padding: 80px 2rem; }
-.lp-section-alt { background: #fafafa; }
+.lp-section-alt {
+  background: #EEF2E8;
+}
 .lp-section-inner { max-width: 1100px; margin: 0 auto; }
 .lp-section-header { text-align: center; margin-bottom: 48px; }
 .lp-section-title {
@@ -260,10 +269,10 @@
   padding: 24px;
   transition: border-color 0.15s;
 }
-.lp-feature-card:hover { border-color: #1D9E75; }
+.lp-feature-card:hover { border-color: #4A9959; }
 .lp-feature-icon {
   font-size: 24px;
-  color: #1D9E75;
+  color: #4A9959;
   margin-bottom: 12px;
 }
 .lp-feature-title {
@@ -291,7 +300,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #1D9E75;
+  color: #4A9959;
   margin-bottom: 10px;
 }
 .lp-case-title {
@@ -305,8 +314,8 @@
 .lp-case-metric {
   font-size: 11px;
   padding: 3px 10px;
-  background: #f0f9f5;
-  color: #1D9E75;
+  background: #EEF2E8;
+  color: #4A9959;
   border-radius: 20px;
   font-weight: 500;
 }
@@ -330,8 +339,8 @@
 .lp-pricing-period { font-size: 16px; font-weight: 400; color: #888; }
 .lp-pricing-note { font-size: 13px; color: #888; margin-bottom: 24px; }
 .lp-pricing-calc {
-  background: #f8fdf9;
-  border: 1px solid #d4f0e4;
+  background: #F4F6F2;
+  border: 1px solid #DDE3D5;
   border-radius: 10px;
   padding: 16px;
   margin-bottom: 24px;
@@ -343,10 +352,10 @@
   color: #444;
   margin-bottom: 10px;
 }
-.lp-calc-redes { font-weight: 600; color: #1D9E75; }
+.lp-calc-redes { font-weight: 600; color: #4A9959; }
 .lp-slider {
   width: 100%;
-  accent-color: #1D9E75;
+  accent-color: #4A9959;
   margin-bottom: 10px;
 }
 .lp-calc-total { font-size: 14px; color: #333; }
@@ -359,7 +368,7 @@
   gap: 10px;
 }
 .lp-pricing-feature { font-size: 14px; color: #444; display: flex; align-items: center; gap: 8px; }
-.lp-check { color: #1D9E75; font-weight: 700; }
+.lp-check { color: #4A9959; font-weight: 700; }
 
 /* ── Contact ── */
 .lp-contact-inner { max-width: 600px; }
@@ -379,20 +388,20 @@
 }
 .lp-form-input:focus {
   outline: none;
-  border-color: #1D9E75;
+  border-color: #4A9959;
   box-shadow: 0 0 0 3px rgba(29,158,117,0.1);
 }
 .lp-form-textarea { resize: vertical; min-height: 100px; }
 .lp-contact-success {
   text-align: center;
   padding: 48px;
-  background: #f0f9f5;
+  background: #F4F6F2;
   border-radius: 16px;
-  border: 1px solid #d4f0e4;
+  border: 1px solid #DDE3D5;
 }
 .lp-success-icon {
   font-size: 32px;
-  color: #1D9E75;
+  color: #4A9959;
   margin-bottom: 12px;
 }
 .lp-success-title { font-size: 20px; font-weight: 600; color: #111; margin-bottom: 6px; }

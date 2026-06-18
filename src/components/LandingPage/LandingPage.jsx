@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./LandingPage.css";
+import logo from "../../assets/logo.png";
 
 const NAV_LINKS = [
   { label: "Funciones", href: "#funciones" },
@@ -81,8 +82,10 @@ export default function LandingPage() {
       {/* NAV */}
       <header className="lp-nav">
         <a href="#inicio" className="lp-logo">
-          <span className="lp-logo-mark">▲</span>
-          Akame <span className="lp-logo-iot">IoT</span>
+        <img src={logo} alt="Akame IoT" className="lp-logo-img" />
+        <span>
+            Akame <span className="lp-logo-iot">IoT</span>
+        </span>
         </a>
         <nav className="lp-nav-links">
           {NAV_LINKS.map((l) => (
@@ -149,7 +152,7 @@ export default function LandingPage() {
                     <polyline
                       points="0,45 30,38 60,42 90,28 120,32 150,20 180,25 210,18 240,22 260,15"
                       fill="none"
-                      stroke="#1D9E75"
+                      stroke="#4A9959"
                       strokeWidth="2"
                       strokeLinejoin="round"
                     />
@@ -160,8 +163,8 @@ export default function LandingPage() {
                     />
                     <defs>
                       <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#1D9E75" stopOpacity="0.15" />
-                        <stop offset="100%" stopColor="#1D9E75" stopOpacity="0" />
+                        <stop offset="0%" stopColor="#4A9959" stopOpacity="0.15" />
+                        <stop offset="100%" stopColor="#4A9959" stopOpacity="0" />
                       </linearGradient>
                     </defs>
                   </svg>
@@ -365,9 +368,11 @@ export default function LandingPage() {
       <footer className="lp-footer">
         <div className="lp-footer-inner">
           <div className="lp-logo">
-            <span className="lp-logo-mark">▲</span>
-            Akame <span className="lp-logo-iot">IoT</span>
-          </div>
+            <img src={logo} alt="Akame IoT" className="lp-logo-img" />
+            <span>
+                Akame <span className="lp-logo-iot">IoT</span>
+            </span>
+            </div>
           <div className="lp-footer-links">
             <a href="#funciones">Funciones</a>
             <a href="#precios">Precios</a>
