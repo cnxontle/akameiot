@@ -220,7 +220,7 @@
 .lp-dp-body {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 20px;
 }
 .lp-sensor-card {
   background: #1E2D1A;
@@ -228,7 +228,7 @@
   border-radius: 14px;
   padding: 18px 20px;
   box-shadow: 0 12px 32px -8px rgba(0,0,0,0.25);
-  max-width: 280px;
+  width: 320px;
 }
 .lp-sensor-card:nth-child(1) {
   align-self: flex-start;
@@ -280,6 +280,81 @@
   color: #66BB6A;
 }
 .lp-trend-arrow { font-size: 12px; }
+
+
+/* ── Chart card (segundo tipo de tarjeta) ── */
+.lp-chart-card {
+  background: #1E2D1A;
+  border: 1px solid #2E4228;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 12px 32px -8px rgba(0,0,0,0.25);
+  width: 320px;
+  align-self: center;
+  transform: rotate(-0.5deg);
+  margin-top: -8px;
+}
+.lp-chart-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #2A3D25;
+}
+.lp-chart-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #E8EDE6;
+}
+.lp-chart-metric {
+  font-size: 11px;
+  color: #6B7B65;
+  margin-top: 2px;
+}
+.lp-chart-range {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  font-size: 10px;
+  color: #6B7B65;
+  font-family: monospace;
+}
+.lp-chart-svg {
+  flex: 1;
+  width: 100%;
+  height: 90px;
+  display: block;
+}
+.lp-chart-gridline {
+  stroke: #2A3D25;
+  stroke-width: 1;
+}
+.lp-chart-days {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #6B7B65;
+  margin-top: 6px;
+  font-family: monospace;
+}
+
+.lp-chart-svg-wrap {
+  display: flex;
+  gap: 6px;
+}
+.lp-chart-yaxis {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 9px;
+  color: #6B7B65;
+  font-family: monospace;
+  padding: 10px 0;
+  text-align: right;
+  min-width: 28px;
+}
 
 /* ── Stats ── */
 .lp-stats {

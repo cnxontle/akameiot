@@ -73,16 +73,37 @@ const SENSOR_PREVIEW = [
       //{ label: "Voltaje", value: "3.76 V", trend: "down" },
     ],
   },
-  {
-    id: 2,
-    name: "Antártida · 1",
-    time: "15/06/2026 07:01:04 p. m.",
-    metrics: [
-      { label: "Humedad", value: "44.27 %", trend: "down" },
-      //{ label: "Voltaje", value: "3.62 V", trend: "down" },
-    ],
-  },
+  
 ];
+
+const CHART_PREVIEW = {
+  name: "Antártida · 50",
+  metric: "Humedad",
+  unit: "%",
+  min: 12.49,
+  max: 53.40,
+  yAxis: [50, 37.5, 25, 12.5],
+  points: (() => {
+    // 7 días, 8 lecturas por día = ciclo diario realista
+    const days = 7;
+    const perDay = 8;
+    const base = 26;
+    const pts = [];
+    for (let d = 0; d < days; d++) {
+      for (let h = 0; h < perDay; h++) {
+        const cycle = Math.sin((h / perDay) * Math.PI * 2 - 1.5) * 10;
+        const noise = (Math.random() - 0.5) * 4;
+        let v = base + cycle + noise;
+        // pico anómalo el día 4 (lunes en la captura original)
+        if (d === 4 && h === 3) v = 53.4;
+        pts.push(Math.max(12.49, Math.round(v * 100) / 100));
+      }
+    }
+    return pts;
+  })(),
+};
+
+
 
 
 const PRECIO_BASE = 500;
@@ -147,28 +168,103 @@ export default function LandingPage() {
           </div>
           <div className="lp-hero-visual">
           <div className="lp-dp-body">
-            {SENSOR_PREVIEW.map((s) => (
-                <div key={s.id} className="lp-sensor-card">
-                  <div className="lp-sensor-head">
-                    <span className="lp-sensor-name">{s.name}</span>
-                    <span className="lp-sensor-time">{s.time}</span>
+          {SENSOR_PREVIEW.map((s) => (
+            <div key={s.id} className="lp-sensor-card">
+              <div className="lp-sensor-head">
+                <span className="lp-sensor-name">{s.name}</span>
+                <span className="lp-sensor-time">{s.time}</span>
+              </div>
+              <div className="lp-sensor-metrics">
+                {s.metrics.map((m) => (
+                  <div key={m.label} className="lp-sensor-metric">
+                    <span className="lp-sensor-metric-label">{m.label}</span>
+                    <span className={`lp-sensor-metric-val ${m.trend}`}>
+                      <span className="lp-trend-arrow">
+                        {m.trend === "up" ? "↑" : "↓"}
+                      </span>
+                      {m.value}
+                    </span>
                   </div>
-                  <div className="lp-sensor-metrics">
-                    {s.metrics.map((m) => (
-                      <div key={m.label} className="lp-sensor-metric">
-                        <span className="lp-sensor-metric-label">{m.label}</span>
-                        <span className={`lp-sensor-metric-val ${m.trend}`}>
-                          <span className="lp-trend-arrow">
-                            {m.trend === "up" ? "↑" : "↓"}
-                          </span>
-                          {m.value}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="lp-chart-card">
+            <div className="lp-chart-head">
+              <div>
+                <div className="lp-chart-name">{CHART_PREVIEW.name}</div>
+                <div className="lp-chart-metric">{CHART_PREVIEW.metric}</div>
+              </div>
+              <div className="lp-chart-range">
+                <span>Min: {CHART_PREVIEW.min.toFixed(2)}</span>
+                <span>Max: {CHART_PREVIEW.max.toFixed(2)}</span>
+              </div>
+            </div>
+            <div className="lp-chart-svg-wrap">
+            <div className="lp-chart-yaxis">
+              {CHART_PREVIEW.yAxis.map((v) => (
+                <span key={v}>{v}{CHART_PREVIEW.unit}</span>
               ))}
             </div>
+            <svg
+              className="lp-chart-svg"
+              viewBox="0 0 320 110"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="chartAreaFill" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#66BB6A" stopOpacity="0.35" />
+                  <stop offset="100%" stopColor="#66BB6A" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              {[0, 1, 2, 3].map((i) => (
+                <line
+                  key={i}
+                  x1="0"
+                  x2="320"
+                  y1={10 + i * 25}
+                  y2={10 + i * 25}
+                  className="lp-chart-gridline"
+                />
+              ))}
+              {(() => {
+                const pts = CHART_PREVIEW.points;
+                const w = 320;
+                const h = 90;
+                const top = 10;
+                const max = Math.max(...pts);
+                const min = Math.min(...pts);
+                const range = max - min || 1;
+                const coords = pts.map((v, i) => {
+                  const x = (i / (pts.length - 1)) * w;
+                  const y = top + h - ((v - min) / range) * h;
+                  return `${x},${y}`;
+                });
+                const line = coords.join(" ");
+                const area = `0,${top + h} ${line} ${w},${top + h}`;
+                return (
+                  <>
+                    <polygon points={area} fill="url(#chartAreaFill)" />
+                    <polyline
+                      points={line}
+                      fill="none"
+                      stroke="#66BB6A"
+                      strokeWidth="1.5"
+                      strokeLinejoin="round"
+                      strokeLinecap="round"
+                    />
+                  </>
+                );
+              })()}
+            </svg>
+          </div>
+            <div className="lp-chart-days">
+              <span>      </span><span>vie.</span><span>sáb.</span><span>dom.</span>
+              <span>lun.</span><span>mar.</span><span>mié.</span><span>jue.</span>
+            </div>
+          </div>
+        </div>
         </div>
           
         </div>
