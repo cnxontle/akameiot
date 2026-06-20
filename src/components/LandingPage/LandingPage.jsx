@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./LandingPage.css";
 import logo from "../../assets/logo.png";
 
+
+
 const NAV_LINKS = [
   { label: "Funciones", href: "#funciones" },
   { label: "Casos de uso", href: "#casos" },
@@ -63,43 +65,76 @@ const USE_CASES = [
   },
 ];
 
+const SENSOR_NUM_1 = Math.floor(Math.random() * 99) + 1;
+const SENSOR_NUM_2 = Math.floor(Math.random() * 99) + 1;
+const HUMEDAD_ACTUAL = (Math.random() * (70 - 30) + 30).toFixed(2);
+
 const SENSOR_PREVIEW = [
   {
     id: 1,
-    name: "Antártida · 2",
-    time: "15/06/2026 07:01:04 p. m.",
+    name: `Antártida · ${SENSOR_NUM_1}`,
+    time: new Date().toLocaleString("es-MX", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    }),
     metrics: [
-      { label: "Humedad", value: "56.24 %", trend: "down" },
-      //{ label: "Voltaje", value: "3.76 V", trend: "down" },
+       { label: "Humedad", value: `${HUMEDAD_ACTUAL} %`, trend: "down" },
     ],
   },
-  
 ];
 
+function getLast7Days() {
+  const labels = ["dom.", "lun.", "mar.", "mié.", "jue.", "vie.", "sáb."];
+  const today = new Date().getDay(); // 0 = domingo ... 6 = sábado
+  const days = [];
+  for (let i = 6; i >= 0; i--) {
+    days.push(labels[(today - i + 7) % 7]);
+  }
+  return days;
+}
+
+const CHART_DAYS = getLast7Days();
+
 const CHART_PREVIEW = {
-  name: "Antártida · 50",
+  name: `Antártida · ${SENSOR_NUM_2}`,
   metric: "Humedad",
   unit: "%",
   min: 12.49,
   max: 53.40,
-  yAxis: [50, 37.5, 25, 12.5],
+  yAxis: [60, 45, 30, 15],
   points: (() => {
-    // 7 días, 8 lecturas por día = ciclo diario realista
+    // 7 días, 8 lecturas por día. Cada día tiene su propio nivel base
+    // (varía un poco respecto al anterior, como el clima real) más el
+    // ciclo diario habitual y ruido de sensor.
     const days = 7;
     const perDay = 8;
-    const base = 26;
+    let dayBase = 26;
     const pts = [];
+
     for (let d = 0; d < days; d++) {
+      // el nivel base del día se mueve respecto al día anterior (random walk)
+      dayBase += (Math.random() - 0.5) * 10;
+      dayBase = Math.min(40, Math.max(18, dayBase));
+
       for (let h = 0; h < perDay; h++) {
-        const cycle = Math.sin((h / perDay) * Math.PI * 2 - 1.5) * 10;
-        const noise = (Math.random() - 0.5) * 4;
-        let v = base + cycle + noise;
-        // pico anómalo el día 4 (lunes en la captura original)
-        if (d === 4 && h === 3) v = 53.4;
-        pts.push(Math.max(12.49, Math.round(v * 100) / 100));
+        const cycle = Math.sin((h / perDay) * Math.PI * 2 - 1.5) * 9;
+        const noise = (Math.random() - 0.5) * 5;
+        let v = dayBase + cycle + noise;
+        pts.push(v);
       }
     }
-    return pts;
+
+    // un pico anómalo en algún punto intermedio, como sensor real
+    const spikeIndex = 25 + Math.floor(Math.random() * 8);
+    pts[spikeIndex] = 53.4;
+
+    // clamp final a los límites declarados
+    return pts.map((v) => Math.min(53.4, Math.max(12.49, Math.round(v * 100) / 100)));
   })(),
 };
 
@@ -260,8 +295,9 @@ export default function LandingPage() {
             </svg>
           </div>
             <div className="lp-chart-days">
-              <span>      </span><span>vie.</span><span>sáb.</span><span>dom.</span>
-              <span>lun.</span><span>mar.</span><span>mié.</span><span>jue.</span>
+              {CHART_DAYS.map((d, i) => (
+                <span key={i}>{d}</span>
+              ))}
             </div>
           </div>
         </div>

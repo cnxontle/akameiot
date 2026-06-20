@@ -299,9 +299,8 @@
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #2A3D25;
 }
+
 .lp-chart-name {
   font-size: 13px;
   font-weight: 600;
