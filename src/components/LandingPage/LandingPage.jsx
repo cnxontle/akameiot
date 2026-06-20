@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./LandingPage.css";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/akame_logo_text_Text.svg";
 
 
 
@@ -160,10 +160,7 @@ export default function LandingPage() {
       {/* NAV */}
       <header className="lp-nav">
         <a href="#inicio" className="lp-logo">
-        <img src={logo} alt="Akame IoT" className="lp-logo-img" />
-        <span>
-            Akame <span className="lp-logo-iot">IoT</span>
-        </span>
+          <img src={logo} alt="Akame IoT" className="lp-logo-full" />
         </a>
         <nav className="lp-nav-links">
           {NAV_LINKS.map((l) => (
@@ -493,11 +490,8 @@ export default function LandingPage() {
       <footer className="lp-footer">
         <div className="lp-footer-inner">
           <div className="lp-logo">
-            <img src={logo} alt="Akame IoT" className="lp-logo-img" />
-            <span>
-                Akame <span className="lp-logo-iot">IoT</span>
-            </span>
-            </div>
+            <img src={logo} alt="Akame IoT" className="lp-logo-full" />
+          </div>
           <div className="lp-footer-links">
             <a href="#funciones">Funciones</a>
             <a href="#precios">Precios</a>

@@ -8,9 +8,9 @@
   line-height: 1.6;
 }
 
-.lp-logo-img {
-  width: 44px;
+.lp-logo-full {
   height: 44px;
+  width: auto;
   object-fit: contain;
   display: block;
 }
