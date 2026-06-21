@@ -72,7 +72,7 @@ const HUMEDAD_ACTUAL = (Math.random() * (70 - 30) + 30).toFixed(2);
 const SENSOR_PREVIEW = [
   {
     id: 1,
-    name: `Antártida · ${SENSOR_NUM_1}`,
+    name: `Magüiras · ${SENSOR_NUM_1}`,
     time: new Date().toLocaleString("es-MX", {
       day: "2-digit",
       month: "2-digit",
@@ -101,7 +101,7 @@ function getLast7Days() {
 const CHART_DAYS = getLast7Days();
 
 const CHART_PREVIEW = {
-  name: `Antártida · ${SENSOR_NUM_2}`,
+  name: `Magüiras · ${SENSOR_NUM_2}`,
   metric: "Humedad",
   unit: "%",
   min: 12.49,
@@ -141,7 +141,7 @@ const CHART_PREVIEW = {
 
 
 
-const PRECIO_BASE = 500;
+const PRECIO_BASE = 200;
 
 export default function LandingPage() {
   const [redes, setRedes] = useState(2);
@@ -234,68 +234,70 @@ export default function LandingPage() {
               </div>
             </div>
             <div className="lp-chart-svg-wrap">
-            <div className="lp-chart-yaxis">
-              {CHART_PREVIEW.yAxis.map((v) => (
-                <span key={v}>{v}{CHART_PREVIEW.unit}</span>
-              ))}
-            </div>
-            <svg
-              className="lp-chart-svg"
-              viewBox="0 0 320 110"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="chartAreaFill" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#66BB6A" stopOpacity="0.35" />
-                  <stop offset="100%" stopColor="#66BB6A" stopOpacity="0" />
-                </linearGradient>
-              </defs>
-              {[0, 1, 2, 3].map((i) => (
-                <line
-                  key={i}
-                  x1="0"
-                  x2="320"
-                  y1={10 + i * 25}
-                  y2={10 + i * 25}
-                  className="lp-chart-gridline"
-                />
-              ))}
-              {(() => {
-                const pts = CHART_PREVIEW.points;
-                const w = 320;
-                const h = 90;
-                const top = 10;
-                const max = Math.max(...pts);
-                const min = Math.min(...pts);
-                const range = max - min || 1;
-                const coords = pts.map((v, i) => {
-                  const x = (i / (pts.length - 1)) * w;
-                  const y = top + h - ((v - min) / range) * h;
-                  return `${x},${y}`;
-                });
-                const line = coords.join(" ");
-                const area = `0,${top + h} ${line} ${w},${top + h}`;
-                return (
-                  <>
-                    <polygon points={area} fill="url(#chartAreaFill)" />
-                    <polyline
-                      points={line}
-                      fill="none"
-                      stroke="#66BB6A"
-                      strokeWidth="1.5"
-                      strokeLinejoin="round"
-                      strokeLinecap="round"
-                    />
-                  </>
-                );
-              })()}
-            </svg>
+          <div className="lp-chart-yaxis">
+            {CHART_PREVIEW.yAxis.map((v) => (
+              <span key={v}>{v}{CHART_PREVIEW.unit}</span>
+            ))}
           </div>
+          <div className="lp-chart-svg-col">
+          <svg
+            className="lp-chart-svg"
+            viewBox="0 0 320 110"
+            preserveAspectRatio="none"
+          >
+            <defs>
+              <linearGradient id="chartAreaFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#66BB6A" stopOpacity="0.35" />
+                <stop offset="100%" stopColor="#66BB6A" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            {[0, 1, 2, 3].map((i) => (
+              <line
+                key={i}
+                x1="0"
+                x2="320"
+                y1={10 + i * 25}
+                y2={10 + i * 25}
+                className="lp-chart-gridline"
+              />
+            ))}
+            {(() => {
+              const pts = CHART_PREVIEW.points;
+              const w = 320;
+              const h = 90;
+              const top = 10;
+              const max = Math.max(...pts);
+              const min = Math.min(...pts);
+              const range = max - min || 1;
+              const coords = pts.map((v, i) => {
+                const x = (i / (pts.length - 1)) * w;
+                const y = top + h - ((v - min) / range) * h;
+                return `${x},${y}`;
+              });
+              const line = coords.join(" ");
+              const area = `0,${top + h} ${line} ${w},${top + h}`;
+              return (
+                <>
+                  <polygon points={area} fill="url(#chartAreaFill)" />
+                  <polyline
+                    points={line}
+                    fill="none"
+                    stroke="#66BB6A"
+                    strokeWidth="1.5"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                  />
+                </>
+              );
+            })()}
+          </svg>
             <div className="lp-chart-days">
               {CHART_DAYS.map((d, i) => (
                 <span key={i}>{d}</span>
               ))}
             </div>
+          </div>
+          </div>
           </div>
         </div>
         </div>
