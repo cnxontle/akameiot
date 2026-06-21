@@ -319,6 +319,7 @@
   font-size: 10px;
   color: #6B7B65;
   font-family: monospace;
+  min-width: 28px;
 }
 .lp-chart-svg {
   flex: 1;
@@ -341,7 +342,7 @@
 
 .lp-chart-svg-wrap {
   display: flex;
-  gap: 6px;
+  gap: 2px;
 }
 .lp-chart-yaxis {
   display: flex;
@@ -351,8 +352,8 @@
   color: #6B7B65;
   font-family: monospace;
   padding: 10px 0;
-  text-align: right;
-  min-width: 28px;
+  text-align: left;
+  min-width: 26px;
 }
 
 /* ── Stats ── */
