@@ -143,7 +143,7 @@ const CHART_PREVIEW = {
 
 const PRECIO_BASE = 200;
 
-export default function LandingPage() {
+export default function LandingPage({ onLogin }) {
   const [redes, setRedes] = useState(2);
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
@@ -169,9 +169,9 @@ export default function LandingPage() {
             </a>
           ))}
         </nav>
-        <a href="/dashboard" className="lp-btn lp-btn-primary">
+        <button onClick={onLogin} className="lp-btn lp-btn-primary">
           Acceder →
-        </a>
+        </button>
       </header>
 
       {/* HERO */}
@@ -383,7 +383,7 @@ export default function LandingPage() {
             <div className="lp-eyebrow">Precios</div>
             <h2 className="lp-section-title">Simple y predecible</h2>
             <p className="lp-section-sub">
-              Pagas solo por las redes que tienes activas. Sin costos ocultos.
+              Pagas solo por las redes que tienes activas.
             </p>
           </div>
           <div className="lp-pricing-card">
@@ -509,7 +509,7 @@ export default function LandingPage() {
             <a href="#funciones">Funciones</a>
             <a href="#precios">Precios</a>
             <a href="#contacto">Contacto</a>
-            <a href="/dashboard">Acceder</a>
+            <button onClick={onLogin} className="lp-footer-btn">Acceder</button>
           </div>
           <div className="lp-footer-copy">© 2026 Akame IoT</div>
         </div>

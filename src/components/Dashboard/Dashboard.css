@@ -1,0 +1,40 @@
+.dash {
+  min-height: 100vh;
+  background: #F4F6F2;
+  display: flex;
+  flex-direction: column;
+}
+.dash-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+.dash-logo { height: 32px; width: auto; }
+.dash-logout {
+  font-size: 13px;
+  color: #888;
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.dash-logout:hover { color: #1a1a1a; border-color: #ccc; }
+.dash-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dash-empty {
+  text-align: center;
+  color: #aaa;
+}
+.dash-empty-icon { font-size: 40px; margin-bottom: 12px; }
+.dash-empty-title { font-size: 18px; font-weight: 500; color: #555; margin-bottom: 6px; }
+.dash-empty-desc { font-size: 14px; color: #aaa; }
