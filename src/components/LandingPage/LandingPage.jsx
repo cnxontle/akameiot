@@ -251,16 +251,27 @@ export default function LandingPage() {
                 <stop offset="100%" stopColor="#66BB6A" stopOpacity="0" />
               </linearGradient>
             </defs>
-            {[0, 1, 2, 3].map((i) => (
-              <line
-                key={i}
-                x1="0"
-                x2="320"
-                y1={10 + i * 25}
-                y2={10 + i * 25}
-                className="lp-chart-gridline"
-              />
-            ))}
+            {(() => {
+                const pts = CHART_PREVIEW.points;
+                const h = 90;
+                const top = 10;
+                const max = Math.max(...pts);
+                const min = Math.min(...pts);
+                const range = max - min || 1;
+                return CHART_PREVIEW.yAxis.map((v) => {
+                  const y = top + h - ((v - min) / range) * h;
+                  return (
+                    <line
+                      key={v}
+                      x1="0"
+                      x2="320"
+                      y1={y}
+                      y2={y}
+                      className="lp-chart-gridline"
+                    />
+                  );
+                });
+              })()}
             {(() => {
               const pts = CHART_PREVIEW.points;
               const w = 320;
