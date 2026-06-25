@@ -5,6 +5,7 @@ import "./Dashboard.css";
 import logo from "../../assets/akame_logo_text_Text.svg";
 
 const API_URL = "https://9asnsxxi5l.execute-api.us-east-2.amazonaws.com/meshes";
+const CHECKOUT_URL = "https://ajmbuteci6.execute-api.us-east-2.amazonaws.com/create-checkout-session";
 
 function statusInfo(lifecycleStatus) {
   if (!lifecycleStatus) return { label: "Desconocido", cls: "unknown" };
@@ -49,6 +50,33 @@ export default function Dashboard({ onLogout }) {
       console.error(err);
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleCheckout(meshId, planId) {
+    try {
+      const session = await fetchAuthSession();
+      const token = session.tokens.idToken.toString();
+
+      const resp = await fetch(CHECKOUT_URL, {
+        method: "POST",
+        headers: {
+          Authorization: token,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ meshId, planId }),
+      });
+
+      const data = await resp.json();
+
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      } else {
+        alert("Error al iniciar el pago. Intenta de nuevo.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error al conectar con el servidor de pagos.");
     }
   }
 
@@ -119,14 +147,29 @@ export default function Dashboard({ onLogout }) {
                       </div>
                       <div className="dash-card-row">
                         <span className="dash-card-label">ID</span>
-                        <span className="dash-card-val dash-card-id">{mesh.meshId}</span>
+                        <span className="dash-card-val dash-card-id">···{mesh.meshId.slice(-4)}</span>
                       </div>
                     </div>
-                    {status.cls === "expired" && (
-                      <button className="dash-card-renew">
-                        Renovar →
+                   <div className="dash-card-actions">
+                    <button
+                      className="dash-card-btn dash-card-btn--primary"
+                      onClick={() => handleCheckout(mesh.meshId, "monthly_onetime")}
+                    >
+                      Renovar +30 días
+                    </button>
+                    {mesh.isRecurring ? (
+                      <button className="dash-card-btn dash-card-btn--danger">
+                        Cancelar suscripción
+                      </button>
+                    ) : (
+                      <button
+                        className="dash-card-btn dash-card-btn--secondary"
+                        onClick={() => handleCheckout(mesh.meshId, "monthly_recurring")}
+                      >
+                        Activar recurrente
                       </button>
                     )}
+                  </div>
                   </div>
                 );
               })}

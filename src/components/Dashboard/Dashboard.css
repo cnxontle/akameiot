@@ -163,20 +163,41 @@
   white-space: nowrap;
 }
 
-.dash-card-renew {
-  width: 100%;
-  padding: 9px;
-  background: #4A9959;
-  color: #fff;
-  border: none;
+.dash-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.dash-card-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 8px 12px;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.15s;
-  margin-top: 4px;
+  border: none;
+  transition: all 0.15s;
+  white-space: nowrap;
 }
-.dash-card-renew:hover { background: #3E824B; }
+.dash-card-btn--primary {
+  background: #4A9959;
+  color: #fff;
+}
+.dash-card-btn--primary:hover { background: #3E824B; }
+.dash-card-btn--secondary {
+  background: transparent;
+  color: #4A9959;
+  border: 1px solid #4A9959;
+}
+.dash-card-btn--secondary:hover { background: #EAF3DE; }
+.dash-card-btn--danger {
+  background: transparent;
+  color: #C0392B;
+  border: 1px solid #E5634B;
+}
+.dash-card-btn--danger:hover { background: #FDECEA; }
 
 /* Responsive */
 @media (max-width: 768px) {
