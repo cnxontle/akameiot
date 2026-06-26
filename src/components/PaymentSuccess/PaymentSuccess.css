@@ -1,0 +1,58 @@
+.ps-bg {
+  min-height: 100vh;
+  background: #F4F6F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.ps-card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+}
+.ps-logo {
+  height: 32px;
+  width: auto;
+  margin: 0 auto 24px;
+  display: block;
+}
+.ps-icon {
+  font-size: 48px;
+  color: #4A9959;
+  margin-bottom: 16px;
+}
+.ps-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+}
+.ps-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.ps-count {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 24px;
+}
+.ps-btn {
+  padding: 10px 24px;
+  background: #4A9959;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ps-btn:hover { background: #3E824B; }
